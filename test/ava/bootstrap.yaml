@@ -1,0 +1,15 @@
+charts:
+  # not minikube friendly
+  # - name: nginx-ingress
+  #  version: 0.28.2
+  - name: jenkins-casc
+    version: 0.1.0
+    #repo: ../helm-jenkins-casc
+    repo: https://raw.githubusercontent.com/the-watchmen/helm-charts/helm-repo/
+    #repo: https://the-watchmen.github.io/helm-charts/
+    secrets:
+      - key: secrets.JENKINS_SYSTEM_MESSAGE
+  # - name: jenkins
+  #   version: 0.18.0
+  #   secrets:
+  #     - key: Master.AdminPassword

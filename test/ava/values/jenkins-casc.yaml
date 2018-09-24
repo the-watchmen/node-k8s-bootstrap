@@ -1,0 +1,38 @@
+configuration:
+  jenkins:
+    #systemMessage: "${JENKINS_SYSTEM_MESSAGE}"
+    # https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos/credentials
+    #
+    credentials:
+      system:
+        domainCredentials:
+          - domain:
+            credentials:
+              - usernamePassword:
+                  scope: SYSTEM
+                  id: ghe-heh-service-id-token
+                  username: kerz.antony
+                  # password: set in manifest.yaml secret for now
+                  # password: "${GHE_HEH_SID_TOKEN}"
+#
+# these secrets currently specified in bootstrap manifest.yaml config as gitignored references
+# in format:
+#
+#  - name: jenkins-casc
+#    version: 0.1.0
+#    repo: ../helm-jenkins-casc
+#    secrets:
+#      - key: JENKINS_SYSTEM_MESSAGE
+#
+# and the value of JENKINS_SYSTEM_MESSAGE will get grabbed from a local gitignored file
+# and set on "helm upgrade" cli call as "--set" args...
+#
+# note: can skip jenkins-casc secret by using bootstrap secret feature directly,
+# but would get into ugly deep set notation:
+#
+# e.g. configuration.jenkins.credentials.system.domainCredentials[0].credentials[0].usernamePassword.password
+#
+# so not too pretty, but noting here for future reference...
+#
+#secrets:
+#  JENKINS_SYSTEM_MESSAGE: "Jenkins Configuration-as-Code FTW!"
