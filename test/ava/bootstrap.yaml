@@ -4,11 +4,21 @@ charts:
   #  version: 0.28.2
   - name: jenkins-casc
     version: 0.1.0
-    #repo: ../helm-jenkins-casc
+    #
+    # local chart dir style
+    #
+    # repo: ../helm-jenkins-casc
+    #
+    # github-pages style
+    #
+    # repo: https://the-watchmen.github.io/helm-charts/
+    #
+    # github raw style
+    #
     repo: https://raw.githubusercontent.com/the-watchmen/helm-charts/helm-repo/
-    #repo: https://the-watchmen.github.io/helm-charts/
+    wait: true
     secrets:
-      - key: secrets.JENKINS_SYSTEM_MESSAGE
+      - key: secrets.GHE_HEH_SID_TOKEN
   # - name: jenkins
   #   version: 0.18.0
   #   secrets:

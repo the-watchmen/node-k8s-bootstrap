@@ -3,8 +3,6 @@
 #
 Master:
   ImageTag: "2.141-alpine"
-#  AdminPassword: s3cret
-
   ContainerEnv:
     # Tell the plugin where to find its config. The '..data'
     # part is needed for now due to this bug:

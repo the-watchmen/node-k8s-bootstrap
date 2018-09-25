@@ -1,38 +1,41 @@
 configuration:
   jenkins:
-    #systemMessage: "${JENKINS_SYSTEM_MESSAGE}"
-    # https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos/credentials
-    #
-    credentials:
-      system:
-        domainCredentials:
-          - domain:
-            credentials:
-              - usernamePassword:
-                  scope: SYSTEM
-                  id: ghe-heh-service-id-token
-                  username: kerz.antony
-                  # password: set in manifest.yaml secret for now
-                  # password: "${GHE_HEH_SID_TOKEN}"
+    systemMessage: "---> Jenkins Configuration-as-Code plugin enabled FTW! <---"
+
+  # https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos/credentials
+  #
+  credentials:
+    system:
+      domainCredentials:
+        - credentials:
+            - usernamePassword:
+                scope: SYSTEM
+                id: ghe-heh-service-id-token
+                username: kerz.antony
+                password: "${GHE_HEH_SID_TOKEN}"
+                description: ghe-heh-service-id-token
 #
-# these secrets currently specified in bootstrap manifest.yaml config as gitignored references
+# these secrets currently specified in bootstrap.yaml config as gitignored references
 # in format:
 #
 #  - name: jenkins-casc
 #    version: 0.1.0
-#    repo: ../helm-jenkins-casc
+#    repo: https://raw.githubusercontent.com/the-watchmen/helm-charts/helm-repo/
 #    secrets:
-#      - key: JENKINS_SYSTEM_MESSAGE
+#      - key: secrets.GHE_HEH_SID_TOKEN
 #
-# and the value of JENKINS_SYSTEM_MESSAGE will get grabbed from a local gitignored file
+# and the value of GHE_HEH_SID_TOKEN will get grabbed from a local gitignored file
 # and set on "helm upgrade" cli call as "--set" args...
 #
-# note: can skip jenkins-casc secret by using bootstrap secret feature directly,
+# note: alternative to jenkins-casc secret mechanism would be to use bootstrap secret feature directly,
 # but would get into ugly deep set notation:
 #
 # e.g. configuration.jenkins.credentials.system.domainCredentials[0].credentials[0].usernamePassword.password
 #
 # so not too pretty, but noting here for future reference...
 #
+# below is what the yaml would look like, if we weren't using bootstrap's secret mechanism.
+# something like below might literally be placed here if we were using something like git-crypt...
+#
 #secrets:
-#  JENKINS_SYSTEM_MESSAGE: "Jenkins Configuration-as-Code FTW!"
+#  GHE_HEH_SID_TOKEN: super-secret

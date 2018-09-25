@@ -16,7 +16,7 @@ export default function({namespace, charts}) {
   exec('helm repo update')
 
   for (const chart of charts) {
-    const {name, version, valuesFile, release, secrets} = chart
+    const {name, version, valuesFile, release, secrets, wait} = chart
     assert(name)
     assert(version)
 
@@ -48,7 +48,7 @@ export default function({namespace, charts}) {
       `${helm.command} upgrade
       --install
       ${yn(config.force) ? '--force' : ''}
-      ${yn(config.wait) ? '--wait' : ''}
+      ${yn(wait || config.wait) ? '--wait' : ''}
       ${yn(config.dryRun) ? '--dry-run' : ''}
       ${isRepo ? `--repo ${repo}` : ''}
       --version ${version}
