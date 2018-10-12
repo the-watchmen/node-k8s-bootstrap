@@ -16,9 +16,9 @@ charts:
     # github raw style
     #
     repo: https://raw.githubusercontent.com/the-watchmen/helm-charts/helm-repo/
-    wait: true
-    secrets:
-      - key: secrets.GHE_HEH_SID_TOKEN
+    # wait: true
+  #   secrets:
+  #     - key: secrets.GHE_HEH_SID_TOKEN
   # - name: jenkins
   #   version: 0.18.0
   #   secrets:

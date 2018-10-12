@@ -1,4 +1,4 @@
-const prefix = 'K8S_BOOT'
+const prefix = 'INCEPTR'
 
 module.exports = {
   root: `${prefix}_ROOT`,

@@ -1,11 +1,11 @@
 module.exports = {
   root: '.',
-  manifest: 'bootstrap.yaml',
-  namespace: 'bootstrap-system',
+  manifest: 'inception.yaml',
+  namespace: 'inception-system',
   dryRun: false,
   // force: // https://github.com/helm/helm/issues/3208
   force: true,
-  wait: false,
+  wait: true,
   secret: {
     root: 'secrets',
     strategy: 'local'
