@@ -12,7 +12,7 @@ export default function({manifest}) {
 
   const {namespace} = config
   try {
-    exec(`kubectl create namespace ${namespace}`)
+    manifest.charts && exec(`kubectl create namespace ${namespace}`)
   } catch (error) {
     if (error.message.includes('AlreadyExists')) {
       dbg('namespace=%o already exists, continuing...', namespace)
