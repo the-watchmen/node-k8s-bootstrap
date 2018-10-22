@@ -18,6 +18,7 @@ RUN apk add --update ca-certificates bash \
 
 ADD build /app
 ENV NODE_CONFIG_DIR /app/config
+ENV HELM_HOME /root/.helm
 RUN rm /app/config/local.js || /bin/true
 WORKDIR /work
 ENTRYPOINT ["node", "/app/dist"]
