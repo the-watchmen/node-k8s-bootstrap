@@ -4,7 +4,7 @@ module.exports = {
   namespace: 'inception-system',
   dryRun: false,
   // force: // https://github.com/helm/helm/issues/3208
-  force: true,
+  force: false,
   wait: true,
   secret: {
     root: 'secrets',

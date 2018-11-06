@@ -16,7 +16,7 @@ export default function({namespace, charts}) {
   exec('helm repo update')
 
   for (const chart of charts) {
-    const {name, version, valuesFile, release, secrets, wait} = chart
+    const {name, discriminator, version, valuesFile, release, secrets, wait} = chart
     assert(name)
     assert(version)
 
@@ -41,7 +41,9 @@ export default function({namespace, charts}) {
     const {helm} = config
     const repo = chart.repo || helm.repo
     const isRepo = repo.startsWith('https://')
-    const values = valuesFile || `${config.root}/${config.values.root}/${name}.yaml`
+    const suffix = discriminator ? `-${discriminator}` : ''
+    const _name = `${name}${suffix}`
+    const values = valuesFile || `${config.root}/${config.values.root}/${_name}.yaml`
     const areValues = fs.existsSync(values)
 
     exec(
@@ -55,7 +57,7 @@ export default function({namespace, charts}) {
       ${areValues ? `--values ${values}` : ''}
       ${getSecretArgs({name, secrets, strategy: config.strategy})}
       --namespace ${namespace}
-      ${release || `${namespace}-${name}`}
+      ${release || `${namespace}-${_name}`}
       ${isRepo ? name : repo}`
     )
   }

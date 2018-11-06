@@ -3,6 +3,7 @@ charts:
   # - name: nginx-ingress
   #  version: 0.28.2
   - name: jenkins-casc
+    discriminator: one
     version: 0.1.0
     #
     # local chart dir style
@@ -23,3 +24,7 @@ charts:
   #   version: 0.18.0
   #   secrets:
   #     - key: Master.AdminPassword
+  - name: jenkins-casc
+    discriminator: two
+    version: 0.1.0
+    repo: https://raw.githubusercontent.com/the-watchmen/helm-charts/helm-repo/
