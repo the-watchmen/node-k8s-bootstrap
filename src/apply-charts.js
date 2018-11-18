@@ -46,6 +46,8 @@ export default function({namespace, charts}) {
     const values = valuesFile || `${config.root}/${config.values.root}/${_name}.yaml`
     const areValues = fs.existsSync(values)
 
+    dbg('name=%o, values=%o', name, values)
+
     exec(
       `${helm.command} upgrade
       --install
@@ -56,8 +58,9 @@ export default function({namespace, charts}) {
       --version ${version}
       ${areValues ? `--values ${values}` : ''}
       ${getSecretArgs({name, secrets, strategy: config.strategy})}
+      --tiller-namespace ${namespace}
       --namespace ${namespace}
-      ${release || `${namespace}-${_name}`}
+      ${release || _name}
       ${isRepo ? name : repo}`
     )
   }
