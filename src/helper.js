@@ -13,8 +13,20 @@ const cloneRoot = `${config.root}/clone`
 export function exec(cmd) {
   const _cmd = oneLine(cmd)
   dbg('cmd=[%o]', _cmd)
-  const out = child.execSync(_cmd)
-  process.stdout.write(out)
+  let out
+  try {
+    out = child.execSync(_cmd)
+    process.stdout.write(out)
+  } catch (error) {
+    dbg(
+      'caught: status=%o, message=%o, stdout=%o, stderr=%o',
+      error.status,
+      error.message,
+      error.stdout,
+      error.stderr
+    )
+    throw error
+  }
   const lines = out.toString().split('\n')
   dbg('result=\n%s', pretty(lines))
   return lines
